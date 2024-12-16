@@ -16,7 +16,7 @@ module.exports = {
         alias: {
           '@features': './src/features',
           '@navigation': './src/navigation',
-          '@app': './src/app'
+          '@app': './src/app',
         },
       },
     ],

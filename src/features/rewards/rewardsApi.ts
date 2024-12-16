@@ -1,33 +1,28 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RewardsQueryParams, RewardsResponse } from "./types";
 
-const REWARDS_API_URL = 'https://staging.helloagain.at/api/v1/clients/5189/bounties/'
+const REWARDS_API = 'https://staging.helloagain.at/api/v1/clients/5189/bounties/'
+const DEFAULT_LIMIT = 20
+const DEFAULT_PAGE = 1
 
 export const rewardsApi = createApi({
     reducerPath: 'rewardsApi',
     baseQuery: fetchBaseQuery({ 
-      baseUrl: REWARDS_API_URL
+      baseUrl: REWARDS_API
     }),
     endpoints: (builder) => ({
       getRewards: builder.query<RewardsResponse, RewardsQueryParams>({
-        query: ({ page = 1, limit = 10 }) => ({
-          url: 'rewards',
-          params: {
-            page,
-            limit
-          }
+        query: ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => ({
+            url: '',
+            params: {
+              page,
+              limit
+            }
+          }),
+        merge: (currentCache, newData) => ({
+            results: [...currentCache.results, ...newData.results],
+            next: newData.next,
         }),
-        serializeQueryArgs: ({ queryArgs }) => {
-          return queryArgs.page;
-        },
-        // Merge incoming data with existing data for pagination
-        merge: (currentCache, newItems) => {
-          return [...currentCache, ...newItems];
-        },
-        // Prevent re-fetching the same page
-        forceRefetch({ currentArg, previousArg }) {
-          return currentArg?.page !== previousArg?.page;
-        }
       })
     })
   });

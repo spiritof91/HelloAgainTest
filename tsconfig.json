@@ -4,7 +4,7 @@
     "paths": {
       "@features/*": ["src/features/*"],
       "@navigation/*": ["src/navigation/*"],
-      "@app/*": ["src/app/*"]
+      "@app/*": ["src/app/*"],
     },
   },
   "extends": "@react-native/typescript-config/tsconfig.json"

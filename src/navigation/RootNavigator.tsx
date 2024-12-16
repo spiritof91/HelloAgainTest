@@ -1,14 +1,34 @@
 import { AvailableRewardsScreen, CollectedRewardsScreen } from "@features/rewards/screens";
 import { createStaticNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 
+export type RootStackParamList = {
+  AvailableRewards: undefined;
+  CollectedRewards: undefined;
+};
 
-const RootStack = createNativeStackNavigator({
+const getBaseScreenOptions = (): NativeStackNavigationOptions => ({
+  headerTitleAlign: 'center',
+  statusBarBackgroundColor: 'white',
+  statusBarStyle: 'dark'
+})
+
+const RootStack = createNativeStackNavigator<RootStackParamList>({
     initialRouteName: 'AvailableRewards',
     screens: {
-      AvailableRewards: AvailableRewardsScreen,
-      CollectedRewards: CollectedRewardsScreen,
+      AvailableRewards: { 
+        screen: AvailableRewardsScreen,
+        options: {
+          ...getBaseScreenOptions(),
+          headerTitle: 'Available Rewards',
+        }
+      },
+      CollectedRewards: { 
+        screen: CollectedRewardsScreen,
+        options: {
+          ...getBaseScreenOptions()
+        }
+      },
     },
   });
 
