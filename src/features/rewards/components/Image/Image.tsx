@@ -1,45 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, ActivityIndicator } from 'react-native';
+import { View, Image, ActivityIndicator, StyleProp, ImageStyle } from 'react-native';
 import { CustomImageProps } from '../../types';
 import styles from './Image.styles';
 
+const defaultImage = require('./assets/reward.png');
+
 const CustomImage: React.FC<CustomImageProps> = ({ uri, style }) => {
-  const [source, setSource] = useState<number | { uri: string }>(require('./assets/reward.png')); 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!!uri);
+  const [source, setSource] = useState<number | { uri: string }>(defaultImage);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const loadImage = async () => {
-      try {
-        if (uri) {
-            await Image.prefetch(uri)
-        }
-        if (isMounted && uri) {
-          setSource({ uri });
-        }
-      } catch (error) {
-        console.error('Image loading error:', error);
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    loadImage();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [uri]);
+useEffect(() => {
+  if (uri && uri.length) {
+    setSource({ uri })
+  }
+}, [uri])
 
   return (
     <View style={[styles.container, style]}>
-      {isLoading && <ActivityIndicator size='small' style={styles.loader} />}
+      {isLoading && <ActivityIndicator size="small" style={styles.loader} />}
       <Image
         source={source}
-        style={[style, isLoading && styles.hidden]}
+        style={[styles.image, style]}
+        onLoadEnd={() => setIsLoading(false)}
+        onLoadStart={() => setIsLoading(true)}
+        onError={() => {
+          setSource(defaultImage);
+          setIsLoading(false);
+        }}
       />
     </View>
   );

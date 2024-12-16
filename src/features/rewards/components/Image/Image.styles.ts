@@ -9,8 +9,9 @@ const styles = StyleSheet.create({
     loader: {
       position: 'absolute',
     },
-    hidden: {
-      opacity: 0,
+    image: {
+      width: 100,
+      height: 100
     },
   });
 
