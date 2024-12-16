@@ -1,16 +1,14 @@
-import { RootState } from "@app/store";
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGetRewardsQuery } from "../rewardsApi";
 import { collectReward } from "../rewardsSlice";
-import { NavigationProps, Reward } from "../types";
+import { ITEM_HEIGHT, NavigationProps, Reward } from "../types";
 import { ActivityIndicator, FlatList, StyleSheet, Text } from "react-native";
 import RewardItem from "../components/RewardItem/RewardItem";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import FloatingButton from "../components/FloatingButton/FloatingButton";
 import { useNavigation } from "@react-navigation/native";
 
-const ITEM_HEIGHT = 120
 const LIST_CONTENT_PADDING = 80
 
 const getItemLayout = (data: any, index: number) => ({

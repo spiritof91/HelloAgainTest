@@ -22,8 +22,5 @@ export const rewardsSlice = createSlice({
   }
 });
 
-export const selectCollectedRewardIds = (state: RootState) => 
-    state.rewards.collectedRewards.map(reward => reward.id);
-
 export const { collectReward } = rewardsSlice.actions;
 export default rewardsSlice.reducer;

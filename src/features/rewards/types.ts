@@ -39,3 +39,6 @@ export interface Reward {
   }
 
   export type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'AvailableRewards'>;
+
+ export const ITEM_HEIGHT = 120
+
