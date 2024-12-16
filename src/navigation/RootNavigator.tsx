@@ -26,7 +26,8 @@ const RootStack = createNativeStackNavigator<RootStackParamList>({
       CollectedRewards: { 
         screen: CollectedRewardsScreen,
         options: {
-          ...getBaseScreenOptions()
+          ...getBaseScreenOptions(),
+          headerTitle: 'Collected Rewards',
         }
       },
     },

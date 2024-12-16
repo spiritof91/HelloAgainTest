@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Image, ActivityIndicator } from 'react-native';
 import { CustomImageProps } from '../../types';
 import styles from './Image.styles';
 
