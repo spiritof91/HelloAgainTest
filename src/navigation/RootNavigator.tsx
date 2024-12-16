@@ -1,3 +1,4 @@
+import { AvailableRewardsScreen, CollectedRewardsScreen } from "@features/rewards/screens";
 import { createStaticNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
@@ -6,8 +7,8 @@ import React from "react";
 const RootStack = createNativeStackNavigator({
     initialRouteName: 'AvailableRewards',
     screens: {
-      AvailableRewards: React.Fragment,
-      ClaimedRewards: React.Fragment,
+      AvailableRewards: AvailableRewardsScreen,
+      CollectedRewards: CollectedRewardsScreen,
     },
   });
 
