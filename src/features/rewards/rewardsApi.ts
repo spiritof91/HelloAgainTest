@@ -12,17 +12,25 @@ export const rewardsApi = createApi({
     }),
     endpoints: (builder) => ({
       getRewards: builder.query<RewardsResponse, RewardsQueryParams>({
-        query: ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => ({
+        query: ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => {
+            return ({
             url: '',
             params: {
               page,
               limit
             }
-          }),
-        merge: (currentCache, newData) => ({
+          })},
+        serializeQueryArgs: ({ endpointName }) => {
+            return endpointName;
+        },
+        merge: (currentCache, newData) => { 
+            return ({
             results: [...currentCache.results, ...newData.results],
             next: newData.next,
-        }),
+        })},
+        forceRefetch({ currentArg, previousArg }) {
+            return currentArg !== previousArg;
+        },
       })
     })
   });

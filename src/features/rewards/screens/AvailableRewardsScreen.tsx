@@ -5,7 +5,7 @@ import { collectReward } from "../rewardsSlice";
 import { ITEM_HEIGHT, NavigationProps, Reward } from "../types";
 import { ActivityIndicator, FlatList, StyleSheet, Text } from "react-native";
 import RewardItem from "../components/RewardItem/RewardItem";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FloatingButton from "../components/FloatingButton/FloatingButton";
 import { useNavigation } from "@react-navigation/native";
 
@@ -59,7 +59,7 @@ const AvailableRewardsScreen = () => {
     }
   
     return (
-        <SafeAreaView>
+        <>
             <FlatList
                 data={results}
                 renderItem={renderRewardItem}
@@ -74,7 +74,7 @@ const AvailableRewardsScreen = () => {
                 }}
             />
             <FloatingButton insets={insets} onPress={onButtonPress} />
-        </SafeAreaView>
+        </>
     );
 }
 
